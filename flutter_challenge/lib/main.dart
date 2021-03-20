@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_challenge/screen/listAvatarScreen.dart';
 import 'package:flutter_challenge/screen/listEmojiScreen.dart';
 import 'package:flutter_challenge/screen/welcomeScreen.dart';
 import 'package:flutter_challenge/state/AppStateProvider.dart';
+import 'package:flutter_challenge/state/navigationState.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -11,13 +13,18 @@ void main() {
 class FlutterChallengeApp extends StatelessWidget {
   Widget rootScreen(BuildContext context, AppStateProvider appState){
     Future<bool> _onWillPop() async {
-      return appState.back();
+      Future<bool> exit =  appState.back(context);
+      appState.refresh();
+      return exit;
     }
 
     Widget screen = null;
     switch(appState.getSelectedScreen()){
-      case AppStateProvider.SCREEN_LIST_EMOJI:
+      case NavigationState.SCREEN_LIST_EMOJI:
         screen = ListEmojiScreen(appState);
+        break;
+      case NavigationState.SCREEN_LIST_AVATAR:
+        screen = ListAvatarScreen(appState);
         break;
       default:
         screen = WelcomeScreen(appState);
@@ -28,7 +35,14 @@ class FlutterChallengeApp extends StatelessWidget {
         title: "Flutter Challenge App",
         home: Scaffold(
             appBar: AppBar(
-              title: Text('Flutter challenge'),
+              leading: appState.getSelectedScreen() != 0 ?  IconButton(
+                icon: Icon(Icons.arrow_back),
+                onPressed: () {
+                  appState.back(context);
+                  appState.refresh();
+                },
+              ) : null,
+              title: Text(appState.getScreenTitle()),
             ),
             body: WillPopScope(
               onWillPop: _onWillPop,

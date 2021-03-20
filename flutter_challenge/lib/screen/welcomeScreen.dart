@@ -9,7 +9,7 @@ class WelcomeScreen extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    Widget welcomeScreen = renderWelcome();
+    Widget welcomeScreen = renderWelcome(context);
     return SingleChildScrollView(
         child: Column(
           children: [
@@ -20,7 +20,7 @@ class WelcomeScreen extends StatelessWidget{
     );
   }
 
-  Widget renderWelcome() {
+  Widget renderWelcome(BuildContext context) {
     String randomEmoji = this.appState.getRandomEmoji();
     return Column(children: [
       randomEmoji != null ?
@@ -33,9 +33,57 @@ class WelcomeScreen extends StatelessWidget{
           onPressed: ()=> this.appState.newRandomImage(),
           child: Text('Random Emoji')),
       TextButton(
-          onPressed: ()=> this.appState.goToEmojiListScreen(),
-          child: Text('Emoji List'))
+          onPressed: (){
+            this.appState.goToEmojiListScreen(context);
+            this.appState.refresh();
+          },
+          child: Text('Emoji List')),
+      userSearch(context),
+      TextButton(
+          onPressed: (){
+            this.appState.goToAvatarListScreen(context);
+            this.appState.refresh();
+            },
+          child: Text('Avatar List')),
     ]);
+  }
+
+  Widget userSearch(BuildContext context) {
+    String username = '';
+    return Padding(
+      padding: const EdgeInsets.all(20.0),
+      child: Row(children: [
+        IconButton(
+            icon: Icon(Icons.close),
+            onPressed: () => appState.clearUser()
+        ),
+        Flexible(
+            child: TextField(
+              decoration: InputDecoration(
+                  border: InputBorder.none,
+                  hintText: 'Add Github username'
+              ),
+              autocorrect: true,
+              onSubmitted: (String searchedWord) {
+                this.appState.setUser(username, context);
+              },
+              onChanged: (String text) {
+                username = text.trim().toLowerCase();
+              },
+              controller: TextEditingController(
+                  text: this.appState.getUser()
+              ),
+            )
+        ),
+        SizedBox(width: 10),
+        GestureDetector(
+            onTap: () => this.appState.setUser(username, context),
+            child:  Icon(Icons.search)
+        )
+
+
+      ]),
+    );
   }
 
 }

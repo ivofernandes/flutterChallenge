@@ -27,4 +27,24 @@ class GithubAPI{
     }
   }
 
+  /// https://api.github.com/users/ivofernandes
+  static Future<String> getAvatarForUser(String username) async{
+
+    String url = baseUrl + 'users/' + username;
+
+    http.Response response = await http.get(url).timeout(Duration(seconds: TIMEOUT),
+        onTimeout: () {
+          throw TimeoutException('Timeout');
+        });
+
+    if (response.statusCode == 200) {
+      Map<String, dynamic> json = jsonDecode(response.body);
+      if(json.containsKey('avatar_url')){
+        return json['avatar_url'];
+      }
+      return null;
+    }else {
+      return null;
+    }
+  }
 }

@@ -22,6 +22,7 @@ class ListEmojiScreen extends StatelessWidget{
       itemCount: emoji.length,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 4,
+          crossAxisSpacing: 5
       ),
       itemBuilder: (BuildContext context, int index){
         return GestureDetector(
@@ -46,7 +47,8 @@ class ListEmojiScreen extends StatelessWidget{
   }
 
   void _onRefresh(BuildContext context) async{
-    await this.appState.loadPreferences(context);
+    await this.appState.loadEmojiPreferences(null, context);
+    this.appState.refresh();
     _refreshController.refreshCompleted();
   }
 
