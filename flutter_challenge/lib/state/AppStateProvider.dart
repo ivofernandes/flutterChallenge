@@ -9,7 +9,9 @@ import 'package:flutter_challenge/api/GithubAPI.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AppStateProvider with ChangeNotifier {
-  final CACHE_EMOJI = 'cache_emoji';
+  static const  String CACHE_EMOJI = 'cache_emoji';
+  static const int SCREEN_WELCOME = 0;
+  static const int SCREEN_LIST_EMOJI = 1;
 
   String _connectionStatus = 'Unknown';
   String _error = null;
@@ -18,6 +20,7 @@ class AppStateProvider with ChangeNotifier {
 
   List<String>_emojiList = [];
   String _randomEmoji = null;
+  int _selectedScreen = 0;
 
   AppStateProvider(BuildContext context){
     loadPreferences(context);
@@ -47,6 +50,10 @@ class AppStateProvider with ChangeNotifier {
 
   String getRandomEmoji() {
     return this._randomEmoji;
+  }
+
+  int getSelectedScreen(){
+    return this._selectedScreen;
   }
 
   void newRandomImage() {
@@ -98,7 +105,14 @@ class AppStateProvider with ChangeNotifier {
   }
 
   Future<bool> back() {
-    print('back pressed');
+    this._selectedScreen = SCREEN_WELCOME;
+    this.notifyListeners();
+  }
+
+  goToEmojiListScreen() {
+
+    this._selectedScreen = SCREEN_LIST_EMOJI;
+    this.notifyListeners();
   }
 
 

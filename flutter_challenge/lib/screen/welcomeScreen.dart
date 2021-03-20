@@ -9,12 +9,12 @@ class WelcomeScreen extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    Widget bigPicture = renderWelcome();
+    Widget welcomeScreen = renderWelcome();
     return SingleChildScrollView(
         child: Column(
           children: [
             this.appState.getEmoji().isNotEmpty ?
-            bigPicture : CircularProgressIndicator()
+            welcomeScreen : CircularProgressIndicator()
           ],
         )
     );
@@ -31,7 +31,10 @@ class WelcomeScreen extends StatelessWidget{
       : CircularProgressIndicator(),
       TextButton(
           onPressed: ()=> this.appState.newRandomImage(),
-          child: Text('Random'))
+          child: Text('Random Emoji')),
+      TextButton(
+          onPressed: ()=> this.appState.goToEmojiListScreen(),
+          child: Text('Emoji List'))
     ]);
   }
 

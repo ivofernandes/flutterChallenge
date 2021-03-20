@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_challenge/screen/listEmojiScreen.dart';
 import 'package:flutter_challenge/screen/welcomeScreen.dart';
 import 'package:flutter_challenge/state/AppStateProvider.dart';
 import 'package:provider/provider.dart';
@@ -13,6 +14,14 @@ class FlutterChallengeApp extends StatelessWidget {
       return appState.back();
     }
 
+    Widget screen = null;
+    switch(appState.getSelectedScreen()){
+      case AppStateProvider.SCREEN_LIST_EMOJI:
+        screen = ListEmojiScreen(appState);
+        break;
+      default:
+        screen = WelcomeScreen(appState);
+    }
     return MaterialApp(
         theme: ThemeData.dark(),
         debugShowCheckedModeBanner: false,
@@ -24,9 +33,10 @@ class FlutterChallengeApp extends StatelessWidget {
             body: WillPopScope(
               onWillPop: _onWillPop,
               child: Center(
-                  child: WelcomeScreen(appState))
+                  child: screen
               ),
             )
+        )
     );
   }
 
