@@ -7,7 +7,6 @@ class GithubAPI{
   static int TIMEOUT = 30;
   static String baseUrl = 'https://api.github.com/';
 
-  /// Get daily data for ticker
   /// Url example:
   /// https://api.github.com/emojis
   static Future<List<String>> getEmoji() async{

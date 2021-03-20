@@ -21,8 +21,18 @@ class WelcomeScreen extends StatelessWidget{
   }
 
   Widget renderWelcome() {
-    //TODO use dataframe to parse and show metrics
-    return Text(this.appState.getEmoji().toString());
+    String randomEmoji = this.appState.getRandomEmoji();
+    return Column(children: [
+      randomEmoji != null ?
+      Container(
+          height:64,
+          child: Image.network(randomEmoji,)
+      )
+      : CircularProgressIndicator(),
+      TextButton(
+          onPressed: ()=> this.appState.newRandomImage(),
+          child: Text('Random'))
+    ]);
   }
 
 }

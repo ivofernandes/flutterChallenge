@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:flutter/services.dart';
 import 'package:flutter/foundation.dart';
@@ -13,8 +14,10 @@ class AppStateProvider with ChangeNotifier {
   String _connectionStatus = 'Unknown';
   String _error = null;
   final Connectivity _connectivity = Connectivity();
+  Random _random = Random();
 
   List<String>_emojiList = [];
+  String _randomEmoji = null;
 
   AppStateProvider(BuildContext context){
     loadPreferences(context);
@@ -35,11 +38,23 @@ class AppStateProvider with ChangeNotifier {
       }
     }
 
-    this.notifyListeners();
+    this.newRandomImage();
   }
 
   List<String> getEmoji() {
     return this._emojiList;
+  }
+
+  String getRandomEmoji() {
+    return this._randomEmoji;
+  }
+
+  void newRandomImage() {
+    if(this._emojiList != null && this._emojiList.isNotEmpty){
+      int index = _random.nextInt(this._emojiList.length);
+      this._randomEmoji = this._emojiList[index];
+    }
+    this.notifyListeners();
   }
 
   // Platform messages are asynchronous, so we initialize in an async method.
@@ -85,6 +100,7 @@ class AppStateProvider with ChangeNotifier {
   Future<bool> back() {
     print('back pressed');
   }
+
 
 
 }
