@@ -13,7 +13,8 @@ class GithubAPI{
 
     String url = baseUrl + 'emojis';
 
-    http.Response response = await http.get(url).timeout(Duration(seconds: TIMEOUT),
+    http.Response response = await http.get(url).timeout(
+        Duration(seconds: TIMEOUT),
         onTimeout: () {
       throw TimeoutException('Timeout');
     });
@@ -43,6 +44,33 @@ class GithubAPI{
         return json['avatar_url'];
       }
       return null;
+    }else {
+      return null;
+    }
+  }
+
+  ///https://api.github.com/users/google/repos
+  static Future<List<String>> getRepos(String username, int currentRepositoryPage) async{
+
+    String url = baseUrl + 'users/' + username + '/repos?page='
+        + currentRepositoryPage.toString();
+
+    http.Response response = await http.get(url).timeout(Duration(seconds: TIMEOUT),
+        onTimeout: () {
+          throw TimeoutException('Timeout');
+        });
+
+    if (response.statusCode == 200) {
+      List<dynamic> json = jsonDecode(response.body);
+      List<String> values = [];
+
+      for(Map<String, dynamic> obj in json){
+        if(obj.containsKey('full_name')) {
+          values.add(obj['full_name']);
+        }
+      }
+
+      return values;
     }else {
       return null;
     }

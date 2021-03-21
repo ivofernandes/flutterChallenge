@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_challenge/screen/listAvatarScreen.dart';
 import 'package:flutter_challenge/screen/listEmojiScreen.dart';
+import 'package:flutter_challenge/screen/repositoriesScreen.dart';
 import 'package:flutter_challenge/screen/welcomeScreen.dart';
 import 'package:flutter_challenge/state/AppStateProvider.dart';
 import 'package:flutter_challenge/state/navigationState.dart';
@@ -18,13 +19,16 @@ class FlutterChallengeApp extends StatelessWidget {
       return exit;
     }
 
-    Widget screen = null;
+    Widget screen;
     switch(appState.getSelectedScreen()){
       case NavigationState.SCREEN_LIST_EMOJI:
         screen = ListEmojiScreen(appState);
         break;
       case NavigationState.SCREEN_LIST_AVATAR:
         screen = ListAvatarScreen(appState);
+        break;
+      case NavigationState.SCREEN_REPOS:
+        screen = RepositoriesScreen(appState);
         break;
       default:
         screen = WelcomeScreen(appState);

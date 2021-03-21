@@ -6,6 +6,7 @@ class NavigationState {
   static const int SCREEN_WELCOME = 0;
   static const int SCREEN_LIST_EMOJI = 1;
   static const int SCREEN_LIST_AVATAR = 2;
+  static const int SCREEN_REPOS = 3;
 
   int _selectedScreen = 0;
 
@@ -15,6 +16,8 @@ class NavigationState {
         return 'List Emoji';
       case SCREEN_LIST_AVATAR:
         return 'List avatars';
+      case SCREEN_REPOS:
+        return 'Repositories';
       default:
         return 'Flutter challenge';
     }
@@ -34,6 +37,10 @@ class NavigationState {
 
   goToAvatarListScreen(BuildContext context) {
     this._selectedScreen = SCREEN_LIST_AVATAR;
+  }
+
+  void goToGoogleReposScreen(BuildContext context) {
+    this._selectedScreen = SCREEN_REPOS;
   }
 
   int getSelectedScreen(){

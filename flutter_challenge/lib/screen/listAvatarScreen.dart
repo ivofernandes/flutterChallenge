@@ -12,7 +12,7 @@ class ListAvatarScreen extends StatelessWidget{
   Widget build(BuildContext context) {
     Widget listEmoji = renderListEmoji(context);
     return this.appState.getAvatarsList().isNotEmpty ?
-            listEmoji : Text('No avatars yet');
+            listEmoji : Text('No avatars added yet');
   }
 
   Widget renderListEmoji(BuildContext context) {
