@@ -2,6 +2,9 @@
 
 Flutter challenge
 
+![price dataframe](https://github.com/ivofernandes/flutterChallenge/blob/master/flutterChallenge.gif?raw=true)
+
+
 ## Challenge
 
 This project is a flutter challenge that let you:
