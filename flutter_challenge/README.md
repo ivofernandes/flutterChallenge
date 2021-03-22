@@ -2,7 +2,7 @@
 
 Flutter challenge
 
-![price dataframe](https://github.com/ivofernandes/flutterChallenge/blob/master/flutterChallenge.gif?raw=true)
+![app recording](https://github.com/ivofernandes/flutterChallenge/flutter_challenge//blob/master/flutterChallenge.gif?raw=true)
 
 
 ## Challenge
