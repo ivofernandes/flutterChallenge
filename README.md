@@ -2,6 +2,8 @@
 
 Flutter challenge
 
+![app recording](https://github.com/ivofernandes/flutterChallenge/blob/5d5f618f6bbd5ce23a69444c491bbfc29849ba3d/flutter_challenge/flutterChalenge.gif?raw=true)
+
 ## Challenge
 
 This project is a flutter challenge that let you:
