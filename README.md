@@ -42,8 +42,11 @@ Display an image placeholder while the real image is not loaded or if there's no
 ### Article Details screen
 On this screen, the user can consult more detailed information about the news article. Also, he can share the article or open it on the browser (the 2 action buttons on the top bar). Consult screenshots for layout reference.
 Settings screen
-Composed by 3 components: 1. Static text saying "Android app admission test, provided by frontkom.com" 2. Ability to change the app theme (between system default, light and dark themes) Note: The selected theme should be persisted between sessions i.e., if the
-user selects light theme, then closes the app and opens it again, the app should be in light mode, even if the phone is in dark mode. 3. A label that fetches the app version and displays it
+Composed by 3 components: 
+1. Static text saying "Android app admission test, provided by frontkom.com" 
+2. Ability to change the app theme (between system default, light and dark themes) Note: The selected theme should be persisted between sessions i.e., if the
+user selects light theme, then closes the app and opens it again, the app should be in light mode, even if the phone is in dark mode. 
+3. A label that fetches the app version and displays it
 ### API reference
 This app only requires one API request to get the content to be presented on the home screen. This app uses the free News API v2
 Base URL: https://newsapi.org/v2
@@ -70,7 +73,7 @@ Feel free to implement any other extra features you want to. Here are some sugge
 
     flutter pub get
     
-2- Run the project in android, iphone or web
+2- Run the project in android or iphone
 
 
 ## How to make this project work on web
